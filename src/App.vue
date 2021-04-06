@@ -1,23 +1,21 @@
 <template>
-  <div id="app">
-    <Header
-
-    />
-      <router-view/>
-    <Footer/>
-  </div>
+  <component :is="layout">
+    <router-view :layout.sync="layout"/>
+  </component>
 </template>
 
 <script>
-import Header from './Layouts/Header';
-import Footer from './Layouts/Footer';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Header,
-    Footer,
+   
   },
+  data() {
+    return {
+      layout: 'div',
+    }
+  }
 };
 </script>
 
