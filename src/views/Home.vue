@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <QuizStart />
+    <Welcome />
   </div>
 </template>
 
 <script>
-import QuizStart from '@/components/QuizStart.vue';
+import Welcome from '@/components/Welcome.vue';
 
 export default {
   name: 'home',
   components: {
-    QuizStart,
+    Welcome,
   },
 };
 </script>
