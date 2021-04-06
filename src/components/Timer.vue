@@ -4,6 +4,7 @@
     {{displayHours}} <span class="leading-snug">:</span>
     {{displayMinutes}} <span class="leading-snug">:</span>
     {{displaySeconds}}
+    <span v-if="expired">Time is up</span>
 
   </div>
 </template>
@@ -11,7 +12,15 @@
 <script>
   export default {
     name: "timer",
-    props:["year","month","date", "hour", "minute","seconds","milliseconds"],
+    props:{
+      year: Number,
+      month: Number,
+      date: Number,
+      hour: Number,
+      minute: Number,
+      seconds: Number,
+      milliseconds: Number
+    },
     computed:{
       _seconds: () => 1000,
       _minutes(){

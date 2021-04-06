@@ -15,7 +15,7 @@ export default {
     return {
       layout: 'div',
     }
-  }
+  },
 };
 </script>
 

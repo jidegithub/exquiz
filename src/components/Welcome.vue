@@ -1,15 +1,15 @@
 <template>
   <div class="bg-main-black">
     <header class="container mx-auto">
-      <div class="pt-16 lg:flex items-center">
+      <div class="pt-16 lg:flex items-center justify-center">
         <div class="w-auto xs:m-0 md:m-1 md:pl-24 md:pr-24">
-          <h2 class="text-white font-black lg:text-4xl md:text-3xl sm:text-xl xs:text-lg mb-4 lg:w-4/5 text-center">
+          <h2 class="text-white font-black lg:text-4xl md:text-3xl sm:text-xl xs:text-lg mb-4 text-center">
               The best app in the world!
           </h2>
-          <div class="text-white opacity-50 mb-4 text-justify lg:w-4/5 md:text-md sm:text-sm xs:text-sm">
+          <div class="text-white opacity-50 mb-4 text-justify md:text-md sm:text-sm xs:text-sm">
               This app helps you discover all the forests arround in order to reconnect with the nature. Download the app and escape from the urban chaos!
           </div>
-          <div class="flex text-center lg:w-auto mb-4 lg:mb-0 justify-center lg:w-4/5">
+          <div class="flex text-center lg:w-auto mb-4 lg:mb-0 justify-center">
             <form class="w-full max-w-lg">
               <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -61,7 +61,7 @@ import CountriesList from './CountriesList.vue';
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   div{
     .bg-main-black {
       background-color: #20232D;

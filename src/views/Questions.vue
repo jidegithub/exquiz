@@ -22,6 +22,11 @@ export default {
   components: {
     QuestionList,
   },
+  computed:{
+    questionsLength(){
+      return this.questions.length - 1;
+    }
+  },
    data(){
     return{
       questions:[],
@@ -33,12 +38,12 @@ export default {
   },
    methods:{
     next(){
-      if (this.index === 9){
+      if (this.index === this.questionsLength){
         this.endOfQuiz = true
+        this.$router.push('/summary')
         alert("end of quiz")
       }
       else(this.index++)
-      
     },
     previous(){
       this.index--

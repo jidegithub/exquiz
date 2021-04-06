@@ -6,7 +6,7 @@
       </p>
     </div>
     <hr>
-    <p class="answers" v-for="(answer, index) in answers" v-bind:key="index"
+    <label class="answers flex items-center mr-2" v-for="(answer, index) in answers" v-bind:key="index" :for="index"
     v-on:click="selectAnswer(index)"
     v-bind:class="[
         !answered && selectedIndex === index ? 'selected' :
@@ -14,16 +14,16 @@
         answered && selectedIndex === index && correctIndex !== index ? 'incorrect' : ''
     ]"
     >
-        {{ answer }}
-    </p>
-    <button class="btn btn-primary" type="submit"
+      <input type="radio" name="answer" :id=index>  {{ answer }}
+    </label>
+    <!-- <button class="btn btn-primary" type="submit"
         v-on:click="submitAnswer"
         v-bind:disabled="selectedIndex === null || answered"
     >
         submit
-    </button>
-    <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="btn btn-primary" type="submit">previous</button>
-    <button v-on:click="next" v-bind:disabled="endOfQuiz" class="btn btn-primary" type="submit">next</button>
+    </button> -->
+    <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
+    <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">next</button>
 </div>
 
 </template>
@@ -46,6 +46,7 @@ export default {
       correctIndex: null,
       shuffledAnswers: [],
       answered: false,
+      unanswered: 0,
     };
   },
   computed: {
@@ -71,6 +72,7 @@ export default {
   },
   methods: {
     selectAnswer(index) {
+      console.log(index)
       this.selectedIndex = index;
     },
     shuffleAnswers() {
@@ -84,8 +86,17 @@ export default {
       if (this.selectedIndex === this.correctIndex) {
         isCorrect = true;
       }
-      this.answered = true;
+
+      if(this.selectedIndex){
+        this.answered = true;
+      }
+      else{
+        this.unanswered++
+      }
       this.increment(isCorrect);
+      this.next()
+      this.selectedIndex = null;
+      this.correctIndex = null;
     },
 
   },

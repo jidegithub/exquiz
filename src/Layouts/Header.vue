@@ -6,7 +6,7 @@
         <Timer
           :year="2021"
           :month="3"
-          :date="6"
+          :date="7"
           :hour="20"
           :minute="7"
           :seconds="0"
