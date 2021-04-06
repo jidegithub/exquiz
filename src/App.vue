@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header
-    
+
     />
       <router-view/>
     <Footer/>
@@ -11,13 +11,14 @@
 <script>
 import Header from './Layouts/Header';
 import Footer from './Layouts/Footer';
+
 export default {
   name: 'app',
-  components:{
+  components: {
     Header,
-    Footer
-  }
-}
+    Footer,
+  },
+};
 </script>
 
 <style lang="scss">

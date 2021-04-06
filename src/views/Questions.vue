@@ -5,13 +5,14 @@
 </template>
 
 <script>
-import QuestionList from '@/components/QuestionList.vue' 
+import QuestionList from '@/components/QuestionList.vue';
+
 export default {
   name: 'questionview',
-  components:{
+  components: {
     QuestionList,
-  }
-}
+  },
+};
 </script>
 
 <style>

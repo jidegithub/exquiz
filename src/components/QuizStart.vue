@@ -7,8 +7,8 @@
 
 <script>
 export default {
-  name: 'newuser'
-}
+  name: 'newuser',
+};
 </script>
 
 <style lang="sass" scoped>

@@ -1,9 +1,7 @@
 import API from './api';
 
-//get questions
+// get questions
 export function getQuestions(callback) {
-  API.get(`/questions`)
-  .then(response => {
-    return callback(response.data);
-  });
+  API.get('/questions')
+    .then((response) => callback(response.data));
 }

@@ -9,11 +9,11 @@
 
 <script>
 export default {
-  props:[
+  props: [
     'numTotal',
-    'numCorrect'
+    'numCorrect',
   ],
-}
+};
 </script>
 
 <style>
