@@ -2,7 +2,7 @@
   <div>
     <nav class="nav-tabs nav-justified">
         <a class="nav-item active mr-5"><b>ExQuiz</b></a>
-        <a class="nav-item">Counter: {{ this.numCorrect }}/{{ this.numTotal }}</a>
+        <a class="nav-item">Counter: {{ this.currentIndex + 1}} of {{ this.numQuestionsData }}</a>
         <Timer
           :year="2021"
           :month="3"
@@ -18,15 +18,13 @@
 
 <script>
 import Timer from '../components/Timer.vue';
-import LayoutDefault from '../Layouts/LayoutDefault.vue'
+import { mapGetters } from "vuex";
 export default {
   components: { Timer },
-  props: [
-    'numTotal',
-    'numCorrect',
-  ],
-  created(){
-    this.$emit('update:layout', LayoutDefault)
+  computed:{
+    ...mapGetters([
+      'currentIndex', 'numQuestionsData'
+    ])
   }
 };
 </script>

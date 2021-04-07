@@ -16,12 +16,7 @@
     >
       <input type="radio" name="answer" :id=index>  {{ answer }}
     </label>
-    <!-- <button class="btn btn-primary" type="submit"
-        v-on:click="submitAnswer"
-        v-bind:disabled="selectedIndex === null || answered"
-    >
-        submit
-    </button> -->
+    
     <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
     <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">next</button>
 </div>
@@ -46,7 +41,6 @@ export default {
       correctIndex: null,
       shuffledAnswers: [],
       answered: false,
-      unanswered: 0,
     };
   },
   computed: {
@@ -64,11 +58,7 @@ export default {
         this.answered = false;
         this.shuffleAnswers();
       },
-    },
-    // (){
-    //     this.selectedIndex = null
-    //     this.shuffleAnswers()
-    // }
+    }
   },
   methods: {
     selectAnswer(index) {
@@ -83,22 +73,16 @@ export default {
     submitAnswer() {
       let isCorrect = false;
 
-      if (this.selectedIndex === this.correctIndex) {
-        isCorrect = true;
-      }
-
-      if(this.selectedIndex){
-        this.answered = true;
-      }
-      else{
-        this.unanswered++
-      }
+      this.selectedIndex === this.correctIndex ? isCorrect = true : null;
+      this.answered = true;
       this.increment(isCorrect);
       this.next()
+      
+      if(this.selectedIndex == null){
+        this.$store.commit('incrementNumUnanswered', 1)
+      }
       this.selectedIndex = null;
-      this.correctIndex = null;
-    },
-
+    }
   },
   // mounted(){
   //     this.shuffleAnswers()

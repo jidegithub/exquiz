@@ -1,21 +1,46 @@
 <template>
-  <component :is="layout">
-    <router-view :layout.sync="layout"/>
-  </component>
+  <div>
+    <component :is="layout">
+      <router-view :layout.sync="layout"/>
+      <a style="cursor:pointer" :style="{'display': installBtn}" @click="installer()">
+        <h1>Install!</h1>
+      </a>
+    </component>
+  </div>
 </template>
 
 <script>
 
 export default {
   name: 'App',
-  components: {
-   
-  },
   data() {
     return {
       layout: 'div',
+      installBtn: "none",
+      installer: undefined,
     }
   },
+  created() {
+    let installPrompt;
+
+    window.addEventListener("beforeinstallprompt", e => {
+      e.preventDefault();
+      installPrompt = e;
+      this.installBtn = "block";
+    });
+
+    this.installer = () => {
+      this.installBtn = "none";
+      installPrompt.prompt();
+      installPrompt.userChoice.then(result => {
+        if (result.outcome === "accepted") {
+          console.log("Install accepted!")
+        } else {
+          console.log("Install denied!")
+        }
+      });
+    };
+  }
 };
 </script>
 

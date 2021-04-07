@@ -2,12 +2,12 @@
   <div>
     <QuestionList
       v-if="questions.length" 
-      v-bind:currentQuestion="questions[index]"
+      v-bind:currentQuestion="questions[currentIndex]"
       :next="next"
       :previous="previous"
       :increment="increment"
-      :endOfQuiz="endOfQuiz"
-      :index="index"
+      :endOfQuiz="endOfQuizState"
+      :index="currentIndex"
     />
   </div>
 </template>
@@ -16,6 +16,7 @@
 import LayoutDefault from "../Layouts/LayoutDefault.vue";
 import {getQuestions} from "../api/questions";
 import QuestionList from '@/components/QuestionList.vue';
+import { mapGetters } from "vuex";
 
 export default {
   name: 'questionview',
@@ -23,40 +24,41 @@ export default {
     QuestionList,
   },
   computed:{
-    questionsLength(){
+    ...mapGetters([
+      'currentIndex','endOfQuizState'
+    ]),
+    lastQuestionIndex(){
       return this.questions.length - 1;
     }
   },
    data(){
     return{
       questions:[],
-      index:0,
-      numCorrect:0,
-      numTotal:0,
-      endOfQuiz: false
     }
   },
    methods:{
     next(){
-      if (this.index === this.questionsLength){
-        this.endOfQuiz = true
+      if (this.currentIndex === this.lastQuestionIndex){
+        this.$store.commit("modifyEndOfQuiz", true)
         this.$router.push('/summary')
-        alert("end of quiz")
+      }else{
+        this.$store.commit("incrementIndex", 1);
       }
-      else(this.index++)
     },
     previous(){
-      this.index--
+      this.$store.commit("decrementIndex", 1);
     },
     increment(isCorrect){
       if(isCorrect){
-        this.numCorrect++
+        this.$store.commit('incrementNumCorrect', 1)
+      } else{
+        this.$store.commit('incrementNumIncorrect', 1)
       }
-      this.numTotal++
     },
     getAllQuestions() {
       getQuestions(response => {
         this.questions = response.results
+        this.$store.commit('modifyNumQuestions', this.questions)
       });
     }
   },
