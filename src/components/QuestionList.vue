@@ -5,7 +5,8 @@
         {{ currentQuestion.question }}
       </p>
     </div>
-    <label id="question" class="answers flex items-center" v-for="(answer, index) in answers" :key="answer.id" :for="answer.id">
+    <label id="question" :class="[!answered && selectedIndex === index ? 'selected' : null]" 
+      class="answers flex items-center" v-for="(answer, index) in answers" :key="answer.id" :for="answer.id">
       <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="answer.id">{{ answer.choice }}
     </label>
     <div id="quiz" class="mt-6"> 
@@ -53,9 +54,6 @@ export default {
         this.questionPoint =  parseFloat(this.currentQuestion.points);
       },
     },
-    // index(){
-    //   console.log('index don change o')
-    // }
   },
   methods: {
     shuffleAnswers() {
@@ -133,8 +131,12 @@ label#question:hover {
   color: #20232D;
 }
 
-label#question + input[type=radio]:checked {
+/* label#question + input[type=radio]:checked {
   background: rgba(229,231,235);
   color: #20232D;
+} */
+.selected{
+  background: rgba(229,231,235)!important;
+  color: #20232D!important;
 }
 </style>

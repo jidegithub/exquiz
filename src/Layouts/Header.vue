@@ -3,15 +3,14 @@
     <section class="">
       <h2 class=""><b>ExQuiz</b></h2>
       <h2 class="text-gray-500">Question {{ this.currentIndex + 1}} / {{ this.numQuestionsData }}</h2>
-      <h2 class="">Timer
+      <h2 class="">Time:
         <Timer
-          :year="2022"
-          :month="3"
-          :date="7"
+          :year="2021"
+          :month="4"
+          :date="8"
           :hour="0"
           :minute="2"
           :seconds="0"
-          :endDate="new Date(2021-12-10)"
           :milliseconds="0"
         />
         </h2>

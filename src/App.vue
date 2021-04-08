@@ -1,7 +1,7 @@
 <template>
   <div class="text-gray-200">
     <component :is="layout">
-      <router-view :layout.sync="layout"/>
+      <router-view :layout.sync="layout" :key="$route.fullPath"/>
       <a style="cursor:pointer" :style="{'display': installBtn}" @click="installer()">
         <h1>Install!</h1>
       </a>

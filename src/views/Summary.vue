@@ -40,7 +40,7 @@
                   <path stroke="none" d="M0 0h24v24H0z"/>
                   <circle cx="12" cy="12" r="9"/>
                 </svg>
-                <p>Missed</p>
+                <p>Incorrect</p>
               </span>
               <p>{{numIncorrectData}}</p>
             </label>
@@ -69,10 +69,11 @@
         <h3 class="px-6 py-2 text-left text-gray-700">SCORE</h3>
         <div class="flex justify-center items-center flex-col p-8">
           <div class="total-answered">
-            <p>{{numCorrectData + numIncorrectData}}</p>
+            <span>You answered</span>
+            <p>{{numCorrectData + numIncorrectData }}</p>
           </div>
           <div class="total-questions">
-            <p>from {{total}} questions</p>
+            <p> questions</p>
           </div>
         </div>
       </div> <!-- end clash-card archer-->
@@ -104,7 +105,7 @@
     name: "summary_view",
       computed:{
       ...mapGetters([
-        'numQuestionsData','numTotalPoints', 
+        'numTotalPoints', 
         'numUnansweredData', 'numIncorrectData', 
         'numCorrectData', 'overAllPointsData'
       ]),
@@ -183,7 +184,8 @@ div.total-questions, div.overall-points{
     font-size: 1.5rem;
   }
 }
-.score-view, .points-view{
+.score-view, .points-view, .summary-view{
   color: #0c252f;
+  margin-top: .8rem;
 }
 </style>

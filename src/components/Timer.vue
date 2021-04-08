@@ -1,8 +1,9 @@
 <template>
-  <button>{{ countDown }}</button>
+  <button>{{ countDown }}secs</button>
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
   export default {
     name: 'timer',
     data(){
@@ -10,6 +11,11 @@
         countDown: 120,
         timer: null
       }
+    },
+    computed:{
+      ...mapGetters([
+        'endOfQuizState'
+      ]),
     },
     methods:{
       countDownTimer() {
@@ -21,8 +27,11 @@
         }
         else if(this.countDown === 0){
           this.$store.commit('modifyTimerState', true)
+          if(this.endOfQuizState){
+            return;
+          }
+          this.$router.push('/summary')
         }
-        
       }
     },
     created(){
@@ -30,6 +39,7 @@
     },
     beforeDestroy(){
       clearInterval(this.timer)
+      this.countDown = null;
     }
   }
 </script>
