@@ -7,6 +7,6 @@ export function getQuestions(callback) {
 }
 
 export function getQuestionsII(callback) {
-  API.get('/questions/v2')
+  API.get('/questions.json')
     .then((response) => callback(response.data));
 }

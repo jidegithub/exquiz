@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  // baseURL: 'https://api.',
-  baseURL: 'http://localhost:3000',
+  // baseURL: 'http://localhost:3000',
+  baseURL: 'https://jidegithub.github.io/exquiz-api/data'
 });
 
 instance.interceptors.response.use(
