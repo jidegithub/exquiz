@@ -1,8 +1,8 @@
 <template>
   <div>
     <QuestionList
-      v-if="questions.length" 
-      v-bind:currentQuestion="questions[currentIndex]"
+      v-if="questionsII.length" 
+      :currentQuestion="questionsII[currentIndex]"
       :next="next"
       :previous="previous"
       :increment="increment"
@@ -14,7 +14,7 @@
 
 <script>
 import LayoutDefault from "../Layouts/LayoutDefault.vue";
-import {getQuestions, getQuestionsII} from "../api/questions";
+import {getQuestionsII} from "../api/questions";
 import QuestionList from '@/components/QuestionList.vue';
 import { mapGetters } from "vuex";
 
@@ -28,13 +28,13 @@ export default {
       'currentIndex','endOfQuizState'
     ]),
     lastQuestionIndex(){
-      return this.questions.length - 1;
+      return this.questionsII.length - 1;
     }
   },
    data(){
     return{
       questions:[],
-      questionsII: [],
+      questionsII:[],
     }
   },
    methods:{
@@ -56,17 +56,11 @@ export default {
         this.$store.commit('incrementNumIncorrect', 1);
       }
     },
-    getAllQuestions() {
-      getQuestions(response => {
-        this.questions = response.results;
-        this.$store.commit('modifyNumQuestions', this.questions);
-      });
-    },
     getAllQuestionsII() {
       getQuestionsII(response => {
         console.log(response)
         this.questionsII = response.results;
-        // this.$store.commit('modifyNumQuestions', this.questions);
+        this.$store.commit('modifyNumQuestions', this.questionsII);
       })
     }
   },
@@ -74,8 +68,8 @@ export default {
     this.$emit(`update:layout`, LayoutDefault);
   },
   mounted:function(){
-   this.getAllQuestions()
    this.getAllQuestionsII()
+   console.log(this.currentIndex)
   }
 };
 </script>

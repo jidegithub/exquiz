@@ -36,7 +36,7 @@ export default new Vuex.Store({
     modifyTimerState(state, timerExpired){
       state.timerExpired = timerExpired;
     },
-    modifyNumTotalPoints(state, numTotalPoints){
+    incrementNumTotalPoints(state, numTotalPoints){
       state.numTotalPoints += numTotalPoints;
     },
     modifyNumQuestions(state, numQuestions){

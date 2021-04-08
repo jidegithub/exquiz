@@ -1,13 +1,13 @@
 <template>
 <div>
-  <div class="jumbotron">
+  <div class="">
     <p>
       {{ currentQuestion.question }}
     </p>
   </div>
   <hr>
-  <label class="answers flex items-center mr-2" v-for="(answer, index) in answers" v-bind:key="index" :for="index">
-    <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="index">{{ answer }}
+  <label class="answers flex items-center mr-2" v-for="(answer, index) in answers" :key="answer.id" :for="answer.id">
+    <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="answer.id">{{ answer.choice }}
   </label>
   
   <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
@@ -34,12 +34,12 @@ export default {
       correctIndex: null,
       shuffledAnswers: [],
       answered: false,
+      questionPoint: 0,
     };
   },
   computed: {
     answers() {
-      const answers = [...this.currentQuestion.incorrect_answers];
-      answers.push(this.currentQuestion.correct_answer);
+      const answers = this.currentQuestion.choices;
       return answers;
     },
   },
@@ -50,6 +50,7 @@ export default {
         this.selectedIndex = null;
         this.answered = false;
         this.shuffleAnswers();
+        this.questionPoint =  parseFloat(this.currentQuestion.points);
       },
     },
     // index(){
@@ -58,14 +59,18 @@ export default {
   },
   methods: {
     shuffleAnswers() {
-      const answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer];
+      const answers = this.currentQuestion.choices;
       this.shuffledAnswers = shuffle(answers);
-      this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer);
+      this.correctIndex = answers.findIndex(choice => choice.is_correct_choice === 1);
     },
     submitAnswer() {
       let isCorrect = false;
 
-      this.selectedIndex === this.correctIndex ? isCorrect = true : null;
+      if(this.selectedIndex === this.correctIndex){
+        isCorrect = true;
+        this.$store.commit('incrementNumTotalPoints', this.questionPoint)
+      }
+  
       this.answered = true;
       this.increment(isCorrect);
       this.next()
