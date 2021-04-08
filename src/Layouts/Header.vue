@@ -1,8 +1,9 @@
 <template>
   <div>
-    <nav class="nav-tabs nav-justified">
-        <a class="nav-item active mr-5"><b>ExQuiz</b></a>
-        <a class="nav-item">Counter: {{ this.currentIndex + 1}} of {{ this.numQuestionsData }}</a>
+    <section class="">
+      <h2 class=""><b>ExQuiz</b></h2>
+      <h2 class="text-gray-500">Question {{ this.currentIndex + 1}} / {{ this.numQuestionsData }}</h2>
+      <h2 class="">Timer
         <Timer
           :year="2022"
           :month="3"
@@ -13,7 +14,8 @@
           :endDate="new Date(2021-12-10)"
           :milliseconds="0"
         />
-    </nav>
+        </h2>
+    </section>
   </div>
 </template>
 

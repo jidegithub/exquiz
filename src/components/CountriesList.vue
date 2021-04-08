@@ -22,7 +22,7 @@ export default {
   methods:{
     getAllCountries() {
       getCountries(response => {
-        this.countries = response.results
+        this.countries = response.countries
       });
     },
     emitSelectedCountry(event){

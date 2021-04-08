@@ -1,19 +1,19 @@
 <template>
-<div>
-  <div class="">
-    <p>
-      {{ currentQuestion.question }}
-    </p>
+  <div>
+    <div class="">
+      <p class="font-medium mb-6">
+        {{ currentQuestion.question }}
+      </p>
+    </div>
+    <label id="question" class="answers flex items-center" v-for="(answer, index) in answers" :key="answer.id" :for="answer.id">
+      <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="answer.id">{{ answer.choice }}
+    </label>
+    <div id="quiz" class="mt-6"> 
+      <!-- <button class="btn btn-primary" type="submit" v-on:click="submitAnswer" v-bind:disabled="selectedIndex === null || answered">submit</button> -->
+      <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
+      <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="focus:outline-none focus:shadow-outline" type="button">next</button>
+    </div>
   </div>
-  <hr>
-  <label class="answers flex items-center mr-2" v-for="(answer, index) in answers" :key="answer.id" :for="answer.id">
-    <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="answer.id">{{ answer.choice }}
-  </label>
-  
-  <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
-  <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">next</button>
-</div>
-
 </template>
 
 <script>
@@ -88,5 +88,53 @@ export default {
 </script>
 
 <style scoped>
-    
+#quiz button {
+  float: right;
+  margin: 8px 0px 0px 8px;
+  padding: 6px 15px;
+  background: #9ACFCC;
+  color: #00403C;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+#quiz button:hover {
+  background: #36a39c;
+  color: #FFF;
+}
+
+#quiz button:disabled {
+  opacity: 0.5;
+  background: #9ACFCC;
+  color: #00403C;
+  cursor: default;
+}
+
+#question input[type=radio] {
+  display: none;
+}
+
+label#question {
+  display: inline-block;
+  margin: 10px auto;
+  padding: 8px;
+  border: 1px solid rgba(229,231,235);
+  background: transparent;
+  color: rgba(229,231,235);
+  width: 100%;
+  min-width: 100px;
+  cursor: pointer;
+}
+
+label#question:hover {
+  background: rgba(229,231,235);
+  color: #20232D;
+}
+
+label#question + input[type=radio]:checked {
+  background: rgba(229,231,235);
+  color: #20232D;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="LayoutDefault">
+  <div class="LayoutDefault bg-main-black p-6">
     <Header/>
     <main class="LayoutDefault__main">
       <slot/>

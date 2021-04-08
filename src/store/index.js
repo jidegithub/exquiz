@@ -12,6 +12,7 @@ export default new Vuex.Store({
     timerExpired: false,
     numTotalPoints: 0,
     numQuestions: 0,
+    overAllPoints: 0,
     index: 0,
   },
   mutations: {
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     modifyNumQuestions(state, numQuestions){
       state.numQuestions = numQuestions.length;
+    },
+    modifyOverAllPoints(state, overAllPoints){
+      state.overAllPoints = overAllPoints;
     }
   },
   actions: {
@@ -63,6 +67,12 @@ export default new Vuex.Store({
     },
     numQuestionsData(state){
       return state.numQuestions;
+    },
+    numTotalPoints(state){
+      return state.numTotalPoints;
+    },
+    overAllPointsData(state){
+      return state.overAllPoints;
     }
   },
   modules: {

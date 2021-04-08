@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mt-4">
     <QuestionList
       v-if="questionsII.length" 
       :currentQuestion="questionsII[currentIndex]"
@@ -33,7 +33,6 @@ export default {
   },
    data(){
     return{
-      questions:[],
       questionsII:[],
     }
   },
@@ -58,10 +57,15 @@ export default {
     },
     getAllQuestionsII() {
       getQuestionsII(response => {
-        console.log(response)
-        this.questionsII = response.results;
+        // console.log(response)
+        this.questionsII = response.questions;
         this.$store.commit('modifyNumQuestions', this.questionsII);
+        const points = this.calculateQuestionPoints(this.questionsII)
+        this.$store.commit('modifyOverAllPoints', points)
       })
+    },
+    calculateQuestionPoints(questionsList){
+      return questionsList.reduce((n, {points}) => n + parseFloat(points), 0);
     }
   },
   created() {
@@ -69,7 +73,6 @@ export default {
   },
   mounted:function(){
    this.getAllQuestionsII()
-   console.log(this.currentIndex)
   }
 };
 </script>

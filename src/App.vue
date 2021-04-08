@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="text-gray-200">
     <component :is="layout">
       <router-view :layout.sync="layout"/>
       <a style="cursor:pointer" :style="{'display': installBtn}" @click="installer()">

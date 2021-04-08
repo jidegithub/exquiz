@@ -4,6 +4,9 @@ import '../src/assets/style.css';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
+import VueEllipseProgress from 'vue-ellipse-progress';
+
+Vue.use(VueEllipseProgress, "vep");
 
 Vue.config.productionTip = false;
 
