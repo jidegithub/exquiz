@@ -1,30 +1,23 @@
 <template>
 <div>
-    <div class="jumbotron">
-      <p>
-       {{ currentQuestion.question }}
-      </p>
-    </div>
-    <hr>
-    <label class="answers flex items-center mr-2" v-for="(answer, index) in answers" v-bind:key="index" :for="index"
-    v-on:click="selectAnswer(index)"
-    v-bind:class="[
-        !answered && selectedIndex === index ? 'selected' :
-        answered && correctIndex === index ? 'correct' :
-        answered && selectedIndex === index && correctIndex !== index ? 'incorrect' : ''
-    ]"
-    >
-      <input type="radio" name="answer" :id=index>  {{ answer }}
-    </label>
-    
-    <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
-    <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">next</button>
+  <div class="jumbotron">
+    <p>
+      {{ currentQuestion.question }}
+    </p>
+  </div>
+  <hr>
+  <label class="answers flex items-center mr-2" v-for="(answer, index) in answers" v-bind:key="index" :for="index">
+    <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="index">{{ answer }}
+  </label>
+  
+  <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
+  <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="bg-main-green text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">next</button>
 </div>
 
 </template>
 
 <script>
-import _ from 'lodash';
+const shuffle = require('lodash.shuffle')
 
 export default {
   props: {
@@ -58,16 +51,15 @@ export default {
         this.answered = false;
         this.shuffleAnswers();
       },
-    }
+    },
+    // index(){
+    //   console.log('index don change o')
+    // }
   },
   methods: {
-    selectAnswer(index) {
-      console.log(index)
-      this.selectedIndex = index;
-    },
     shuffleAnswers() {
       const answers = [...this.currentQuestion.incorrect_answers, this.currentQuestion.correct_answer];
-      this.shuffledAnswers = _.shuffle(answers);
+      this.shuffledAnswers = shuffle(answers);
       this.correctIndex = this.shuffledAnswers.indexOf(this.currentQuestion.correct_answer);
     },
     submitAnswer() {
@@ -84,27 +76,12 @@ export default {
       this.selectedIndex = null;
     }
   },
-  // mounted(){
-  //     this.shuffleAnswers()
-  // }
+  mounted(){
+    this.shuffleAnswers()
+  }
 };
 </script>
 
 <style scoped>
-    .answers{
-        width: 50%;
-    }
-    .answers:hover{
-        background-color:#eee;
-        cursor: pointer;
-    }
-    .selected{
-        background-color: lightblue;
-    }
-    .correct{
-        background-color: lightgreen;
-    }
-    .incorrect{
-        background-color: lightsalmon;
-    }
+    
 </style>
