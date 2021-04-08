@@ -14,7 +14,7 @@
 
 <script>
 import LayoutDefault from "../Layouts/LayoutDefault.vue";
-import {getQuestions} from "../api/questions";
+import {getQuestions, getQuestionsII} from "../api/questions";
 import QuestionList from '@/components/QuestionList.vue';
 import { mapGetters } from "vuex";
 
@@ -34,6 +34,7 @@ export default {
    data(){
     return{
       questions:[],
+      questionsII: [],
     }
   },
    methods:{
@@ -50,16 +51,23 @@ export default {
     },
     increment(isCorrect){
       if(isCorrect){
-        this.$store.commit('incrementNumCorrect', 1)
+        this.$store.commit('incrementNumCorrect', 1);
       } else{
-        this.$store.commit('incrementNumIncorrect', 1)
+        this.$store.commit('incrementNumIncorrect', 1);
       }
     },
     getAllQuestions() {
       getQuestions(response => {
-        this.questions = response.results
-        this.$store.commit('modifyNumQuestions', this.questions)
+        this.questions = response.results;
+        this.$store.commit('modifyNumQuestions', this.questions);
       });
+    },
+    getAllQuestionsII() {
+      getQuestionsII(response => {
+        console.log(response)
+        this.questionsII = response.results;
+        // this.$store.commit('modifyNumQuestions', this.questions);
+      })
     }
   },
   created() {
@@ -67,6 +75,7 @@ export default {
   },
   mounted:function(){
    this.getAllQuestions()
+   this.getAllQuestionsII()
   }
 };
 </script>
