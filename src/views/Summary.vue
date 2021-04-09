@@ -1,13 +1,10 @@
 <template>
-  <div class="bg-main-black summary">
+  <div class="summary py-6">
   
     <div class="summary-view">
       <div class="clash-card barbarian">
-        <div class="clash-card__image clash-card__image--barbarian">
-          
-        </div>
         <h3 class="px-6 py-2 text-left text-gray-700">SUMMARY</h3>
-        <div class="flex items-center justify-around pt-6 pb-8">
+        <div class="flex items-center justify-around pt-6 pb-8 px-4">
           <section class="arc">
             <vep 
             :data="data"                    
@@ -63,30 +60,19 @@
     
     <div class="score-view">
       <div class="clash-card archer">
-        <div class="clash-card__image clash-card__image--archer">
-          
-        </div>
         <h3 class="px-6 py-2 text-left text-gray-700">SCORE</h3>
-        <div class="flex justify-center items-center flex-col p-8">
-          <div class="total-answered">
+        <div class="flex justify-center items-center flex-col py-4 px-8">
+          <div class="overall-points">
             <span>You answered</span>
             <p>{{numCorrectData + numIncorrectData }}</p>
           </div>
-          <div class="total-questions">
+          <div class="overall-points">
             <p> questions</p>
           </div>
         </div>
-      </div> <!-- end clash-card archer-->
-    </div> <!-- end wrapper -->
-
-    <div class="points-view">
-      <div class="clash-card archer">
-        <div class="clash-card__image clash-card__image--archer">
-          
-        </div>
-        <h3 class="px-6 py-2 text-left text-gray-700">POINTS</h3>
-        <div class="flex justify-center items-center flex-col p-8">
-          <div class="total-points">
+        <div class="flex justify-center items-center flex-col py-6 px-8">
+          <div class="overall-points">
+            <span>You got</span>
             <p>{{numTotalPoints}}.00</p>
           </div>
           <div class="overall-points">
@@ -95,7 +81,6 @@
         </div>
       </div> <!-- end clash-card archer-->
     </div> <!-- end wrapper -->
-
   </div>
 </template>
 
@@ -153,12 +138,11 @@ $archer: #EE5487;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
-  height: 150vh;
 }
 
 .clash-card {
   background: white;
-  width: 300px;
+  width: 100%;
   display: inline-block;
   margin: auto;
   border-radius: $border-radius-size + 5;
@@ -174,18 +158,18 @@ $archer: #EE5487;
   font-weight: 700;
   margin-bottom: 3px;
 }
-div.total-answered, div.total-points{
+div.total-points{
   &>p{
     font-size: 5rem;
   }
 }
 
-div.total-questions, div.overall-points{
+div.overall-points{
   &>p{
     font-size: 1.5rem;
   }
 }
-.score-view, .points-view, .summary-view{
+.score-view, .summary-view{
   color: #0c252f;
   margin-top: .8rem;
 }

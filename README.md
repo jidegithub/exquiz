@@ -96,9 +96,11 @@ Quiz summary is managed by Vuex. Other data are managed by their own business pa
 ## To Scalability
 
   Code splitting: I would probably split the app into lazily loaded chunks for fast transport over the network.
+  Modularize the Vuex store.
 
 ## Done Differently
 
   A dynamic and reusable timedown counter
   Subtle animation of Components and its element
+  Use a graph to show results compared to other candidates
 

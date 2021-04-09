@@ -1,18 +1,23 @@
 <template>
-  <div class="text-gray-200">
-    <component :is="layout">
-      <router-view :layout.sync="layout" :key="$route.fullPath"/>
+  <div id="app" class="text-gray-200 bg-main-black">
+    <Header v-if="$route.path === '/questions'"/>
+      <router-view />
       <a style="cursor:pointer" :style="{'display': installBtn}" @click="installer()">
         <h1 id="install-prompt">Install!</h1>
       </a>
-    </component>
+    <Footer/>
   </div>
 </template>
 
 <script>
-
+import Header from './Layouts/Header';
+import Footer from './Layouts/Footer';
 export default {
   name: 'App',
+  components:{
+    Header,
+    Footer
+  },
   data() {
     return {
       layout: 'div',
@@ -55,5 +60,17 @@ html {
 h1#install-prompt{
   position: fixed;
   bottom: 0;
+}
+#app{
+  height: 100vh;
+}
+.bg-main-black {
+  background-color: #20232D;
+}
+.bg-main-green{
+  background-color: #1f8a65;
+  :hover{
+    background-color: #1f8a65d7;
+  }
 }
 </style>

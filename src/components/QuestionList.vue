@@ -18,7 +18,8 @@
 </template>
 
 <script>
-const shuffle = require('lodash.shuffle')
+const shuffle = require('lodash.shuffle');
+import{mapGetters} from 'vuex';
 
 export default {
   props: {
@@ -102,6 +103,7 @@ export default {
     },
     terminateQuiz(e){
       this.preventNav(e)
+      this.$store.commit('modifyEndOfQuiz', true)
       this.$router.replace("/summary")
     }
   },

@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import LayoutDefault from "../Layouts/LayoutDefault.vue";
 import {getQuestionsII} from "../api/questions";
 import QuestionList from '@/components/QuestionList.vue';
 import { mapGetters } from "vuex";
@@ -67,9 +66,6 @@ export default {
     calculateQuestionPoints(questionsList){
       return questionsList.reduce((n, {points}) => n + parseFloat(points), 0);
     }
-  },
-  created() {
-    this.$emit(`update:layout`, LayoutDefault);
   },
   mounted:function(){
    this.getAllQuestionsII()

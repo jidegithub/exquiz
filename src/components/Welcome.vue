@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-main-black">
+  <div id="welcome" class="bg-main-black">
     <header class="container mx-auto">
       <div class="pt-10 lg:flex items-center justify-center">
         <div class="w-auto xs:m-0 md:m-1 md:pl-24 md:pr-24">
@@ -86,18 +86,9 @@ import CountriesList from './CountriesList.vue';
 };
 </script>
 
-<style lang="scss">
-  div{
-    .bg-main-black {
-      background-color: #20232D;
-      height: 100vh;
-    }
-    .bg-main-green{
-      background-color: #1f8a65;
-      :hover{
-        background-color: #1f8a65d7;
-      }
-    }
+<style lang="scss" scoped>
+  #welcome{
+    height: 100vh;
   }
 </style>
 

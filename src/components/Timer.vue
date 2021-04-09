@@ -39,7 +39,7 @@ import {mapGetters} from 'vuex';
     },
     beforeDestroy(){
       clearInterval(this.timer)
-      this.countDown = null;
+      this.countDown = 0;
       this.$el.parentNode.removeChild(this.$el)
     }
   }
