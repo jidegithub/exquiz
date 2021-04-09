@@ -13,6 +13,7 @@
 git clone https://github.com/jidegithub/exquiz.git
 
 # Install dependencies
+```
 npm install
 
 ### Compiles and hot-reloads for development
@@ -37,20 +38,29 @@ npm run lint
 
 ## Build Setup
 
+
 ``` bash
 # install dependencies
+```
 npm install
 
 # serve with hot reload at localhost:8080
+```
 npm run dev
+```
 
 # build for production with minification
+```
 npm run build
+```
 
 # run unit tests
+```
 npm run unit
+```
 
 # run all tests
+```
 npm test
 ```
 
@@ -63,7 +73,7 @@ npm test
 
 ```
 ├── dist                      // dist 
-├── config                     // config
+├── public                     // public
 ├── src                        // source code
 │   ├── api                    // all requests
 │   ├── assets                 // static resource like themes, fonts
