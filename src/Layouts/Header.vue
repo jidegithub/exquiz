@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="header-comp">
     <section class="">
       <h2 class=""><b>ExQuiz</b></h2>
       <h2 class="text-gray-500">Question {{ this.currentIndex + 1}} / {{ this.numQuestionsData }}</h2>

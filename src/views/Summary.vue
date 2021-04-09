@@ -153,6 +153,7 @@ $archer: #EE5487;
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  height: 150vh;
 }
 
 .clash-card {

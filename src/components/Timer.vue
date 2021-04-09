@@ -40,6 +40,7 @@ import {mapGetters} from 'vuex';
     beforeDestroy(){
       clearInterval(this.timer)
       this.countDown = null;
+      this.$el.parentNode.removeChild(this.$el)
     }
   }
 </script>

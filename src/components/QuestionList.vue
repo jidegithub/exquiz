@@ -10,7 +10,7 @@
       <input type="radio" :value="index" name="answer" v-model="selectedIndex" :id="answer.id">{{ answer.choice }}
     </label>
     <div id="quiz" class="mt-6"> 
-      <!-- <button class="btn btn-primary" type="submit" v-on:click="submitAnswer" v-bind:disabled="selectedIndex === null || answered">submit</button> -->
+      <button class="btn btn-primary" type="submit" v-on:click="terminateQuiz" v-bind:disabled="selectedIndex === null || answered">submit</button>
       <button v-on:click="previous" v-bind:disabled="!endOfQuiz && index === 0" class="focus:outline-none focus:shadow-outline mr-4" type="button">previous</button>
       <button v-on:click="submitAnswer" v-bind:disabled="endOfQuiz" class="focus:outline-none focus:shadow-outline" type="button">next</button>
     </div>
@@ -36,7 +36,23 @@ export default {
       shuffledAnswers: [],
       answered: false,
       questionPoint: 0,
+      isEditing: true
     };
+  },
+  beforeMount() {
+    window.addEventListener("beforeunload", this.preventNav);
+    this.$once("hook:beforeDestroy", () => {
+      window.removeEventListener("beforeunload", this.preventNav);
+    });
+  },
+
+  beforeRouteLeave(to, from, next) {
+    if (this.isEditing) {
+      if (!window.confirm("Leave without finishing?")) {
+        return;
+      }
+    }
+    next();
   },
   computed: {
     answers() {
@@ -77,6 +93,16 @@ export default {
         this.$store.commit('incrementNumUnanswered', 1)
       }
       this.selectedIndex = null;
+    },
+    preventNav(event) {
+      if (!this.isEditing) return;
+      event.preventDefault();
+      // Chrome requires returnValue to be set.
+      event.returnValue = "";
+    },
+    terminateQuiz(e){
+      this.preventNav(e)
+      this.$router.replace("/summary")
     }
   },
   mounted(){

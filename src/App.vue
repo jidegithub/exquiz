@@ -3,7 +3,7 @@
     <component :is="layout">
       <router-view :layout.sync="layout" :key="$route.fullPath"/>
       <a style="cursor:pointer" :style="{'display': installBtn}" @click="installer()">
-        <h1>Install!</h1>
+        <h1 id="install-prompt">Install!</h1>
       </a>
     </component>
   </div>
@@ -51,5 +51,9 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+h1#install-prompt{
+  position: fixed;
+  bottom: 0;
 }
 </style>
